@@ -38,7 +38,6 @@ public class Car {
     }
     
     
-
     public void turnLeft() {
         this.car.setRotate(this.car.getRotate() - 2);
     }
@@ -48,7 +47,7 @@ public class Car {
     }
 
     public void move() {
-        //magic happens here
+        System.out.println("magnitute: " + movement.magnitude());
         
         double newXPoint = this.car.getTranslateX()+this.movement.getX();
         //double vauhtiapumuuttuja = (newXPoint - this.car.getTranslateX());
@@ -56,18 +55,21 @@ public class Car {
         //    vauhtiapumuuttuja*=(-1);
         //}
         //System.out.println("vauhti jälkeen: " + vauhtiapumuuttuja);
-
         this.car.setTranslateX(newXPoint);
         
         double newYPoint = this.car.getTranslateY() + this.movement.getY();
-        System.out.println("getTranslateX" + this.car.getTranslateY());
-        System.out.println("movement.getX" + this.movement.getX());
+        //System.out.println("getTranslateX" + this.car.getTranslateY());
+        //System.out.println("movement.getX" + this.movement.getX());
         this.car.setTranslateY(newYPoint);
+        
+        int speed = (int) (movement.magnitude()*100);
+        this.velocity= speed;
+        System.out.println("this.velocity" + this.velocity);
         //System.out.println("newX: " + newXPoint + "newY: " +newYPoint);
         
-        if (!(this.movement.getX()== 0 &&  this.movement.getY()== 0)){
+        /*if (!(this.movement.getX()== 0 &&  this.movement.getY()== 0)){
             countVelocity(newXPoint, newYPoint);
-        }
+        }*/
 
 
         //driving out of the screen
@@ -95,7 +97,7 @@ public class Car {
         //tässä kohtaa se palauttaa 0.05
         changeInY *= 0.05;
         this.movement = this.movement.add(changeInX, changeInY);
-        System.out.println(this.movement);
+        //System.out.println(this.movement);
         
         
         //this.movement palauttaa olion, jolla on X ja Y.
@@ -115,7 +117,7 @@ public class Car {
         this.movement = this.movement.add(changeInX, changeInY);
     }
     
-    public void countVelocity(double x, double y){
+    /*public void countVelocity(double x, double y){
         System.out.println("countVelocityn alku x ja y: " + x + " ja " + y);
         double speed = Math.sqrt(Math.pow(x, 2)*Math.pow(y, 2));
         //speed *=10;
@@ -124,5 +126,5 @@ public class Car {
         this.setVelocity(newSpeed);
         
         //this.speedometer.incrementAndGet();
-    }
+    }*/
 }

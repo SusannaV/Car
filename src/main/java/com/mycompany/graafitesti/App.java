@@ -71,7 +71,7 @@ public class App extends Application {
                 }
 
                 car.move();
-                textbox.setText("Velocity: " + speedometer.addAndGet(car.getVelocity()));
+                textbox.setText("Velocity: " + speedometer.getAndSet(car.getVelocity()));
                 System.out.println("velo" + car.getVelocity());
             }
         }.start();
