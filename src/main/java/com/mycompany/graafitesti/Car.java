@@ -49,6 +49,7 @@ public class Car {
 
     public void move() {
         //magic happens here
+        
         double newXPoint = this.car.getTranslateX()+this.movement.getX();
         //double vauhtiapumuuttuja = (newXPoint - this.car.getTranslateX());
         //if (!(vauhtiapumuuttuja>=0)){
@@ -67,9 +68,7 @@ public class Car {
         if (!(this.movement.getX()== 0 &&  this.movement.getY()== 0)){
             countVelocity(newXPoint, newYPoint);
         }
-        
-        
-        
+
 
         //driving out of the screen
         if (this.car.getTranslateX() < 0) {
