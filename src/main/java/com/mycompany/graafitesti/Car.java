@@ -46,7 +46,6 @@ public class Car {
     }
 
     public void move() {
-        System.out.println("magnitute: " + movement.magnitude());
         
         double newXPoint = this.car.getTranslateX()+this.movement.getX();
         this.car.setTranslateX(newXPoint);
@@ -56,7 +55,7 @@ public class Car {
         
         int speed = (int) (movement.magnitude()*10);
         this.velocity= speed;
-        System.out.println("angle" + this.movement.angle(this.car.getTranslateX(), this.car.getTranslateY()));
+        
 
 
         //driving out of the screen
@@ -90,5 +89,9 @@ public class Car {
         changeInX *= -0.05;
         changeInY *= -0.05;
         this.movement = this.movement.add(changeInX, changeInY);
+    }
+    
+    public int getAngle(int x, int y){
+        return (int)this.movement.angle(x, y);
     }
 }

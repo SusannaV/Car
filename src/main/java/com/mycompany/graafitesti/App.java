@@ -19,20 +19,24 @@ public class App extends Application {
     
     public static int width = 1000;
     public static int height = 600;
+    
 
     @Override
     public void start(Stage stage) throws Exception {
         //create screen and a car
         Pane screen = new Pane();
         
-        Text textbox = new Text(10, 20, "Velocity: ");
-        screen.getChildren().add(textbox);
+        Text velocity = new Text(10, 20, "Velocity: ");
+        Text direction = new Text(10,40, "Direction: ");
+        screen.getChildren().add(velocity);
+        screen.getChildren().add(direction);
         
         AtomicInteger speedometer = new AtomicInteger();
         
         screen.setPrefSize(width, height);
         Car car = new Car(width/2, height/2, speedometer);
         screen.getChildren().add(car.getCar());
+        
 
         Scene scene = new Scene(screen);
         stage.setTitle("This is a Car program");
@@ -71,7 +75,9 @@ public class App extends Application {
                 }
 
                 car.move();
-                textbox.setText("Velocity: " + speedometer.getAndSet(car.getVelocity())+ "km/h");
+                velocity.setText("Velocity: " + speedometer.getAndSet(car.getVelocity())+ "km/h");
+                direction.setText("Direction: " + car.getAngle(0,-1) + "°");
+                System.out.println("angle: " + car.getAngle(0,-1) );
             }
         }.start();
 
