@@ -12,12 +12,15 @@ second.
 4. The functionality of the car should be logical (the car can’t accelerate with the engine
 turned off, the car can’t turn at zero velocity, and so on). Throttling and braking
 should affect the velocity and turning should affect the direction.
+
 Methods
 You may use any programming or scripting language (Python, Javascript, C#, Lua...) for
 completing this task. If you are not comfortable with any programming language, you can
 even write pseudo code, as long as you document it well.
+
 Evaluation
 Your design, structure, clarity of implementation and documentation (comments, design
 documents etc.) will be evaluated.
+
 Return your submission as a zip file ​or​ as a link to a cloud service of your choosing (e.g.
 Github, Pastebin…) containing all your files.
