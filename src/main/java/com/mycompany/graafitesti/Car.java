@@ -13,15 +13,14 @@ public class Car {
     private Rectangle car;
     private Point2D movement;
     private int velocity;
-    private AtomicInteger speedometer;
 
-    public Car(int x, int y, AtomicInteger speedometer) {
+
+    public Car(int x, int y) {
         this.car = new Rectangle(50, 30);
         this.car.setTranslateX(x);
         this.car.setTranslateY(y);
         this.movement = new Point2D(0, 0);
         this.velocity = 0;
-        this.speedometer = speedometer;
     }
 
     public Rectangle getCar() {
