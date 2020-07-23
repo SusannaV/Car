@@ -6,8 +6,9 @@ import java.util.Map;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,18 +21,35 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //create screen and a car
+        GridPane bigscreen = new GridPane();
+        bigscreen.setHgap(8);
         Pane screen = new Pane();
-
+        
+        Button powerOnButton = new Button( "Power on");
+        Button powerOffButton = new Button("Power off");
         Text velocity = new Text(10, 20, "Velocity: ");
         Text direction = new Text(10, 40, "Direction: ");
-        screen.getChildren().add(velocity);
-        screen.getChildren().add(direction);
+        Text engine = new Text (10, 20, "The engine is off. Start the engine.");
+        
+        powerOnButton.setFocusTraversable(false);
+        powerOffButton.setFocusTraversable(false);
+        bigscreen.add(powerOnButton, 0,0);
+        bigscreen.add(powerOffButton, 1,0);
+        bigscreen.add(velocity, 0,1);
+        bigscreen.add(direction, 1,1);
+        bigscreen.add(engine, 2, 0);
+        bigscreen.add(screen, 0,2);
+        
+        
 
-        screen.setPrefSize(width, height);
+        bigscreen.setPrefSize(width, height);
         Car car = new Car(width / 2, height / 2);
         screen.getChildren().add(car.getCar());
+        
+        powerOnButton.setOnAction(event -> car.setRunning(true));
+        powerOffButton.setOnAction(event -> car.setRunning(false));
 
-        Scene scene = new Scene(screen);
+        Scene scene = new Scene(bigscreen);
         stage.setTitle("This is a Car program");
         stage.setScene(scene);
         stage.show();

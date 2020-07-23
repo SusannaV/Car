@@ -13,6 +13,7 @@ public class Car {
     private Rectangle car;
     private Point2D movement;
     private int velocity;
+    private boolean running;
 
 
     public Car(int x, int y) {
@@ -21,6 +22,7 @@ public class Car {
         this.car.setTranslateY(y);
         this.movement = new Point2D(0, 0);
         this.velocity = 0;
+        this.running=false;
     }
 
     public Rectangle getCar() {
@@ -34,6 +36,16 @@ public class Car {
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+    
+    
 
     public void turnLeft() {
         if (!(this.velocity<=0)){
@@ -52,6 +64,7 @@ public class Car {
     }
 
     public void move() {
+        if (!(this.running=false)){
 
         double newXPoint = this.car.getTranslateX() + this.movement.getX();
         this.car.setTranslateX(newXPoint);
@@ -77,17 +90,19 @@ public class Car {
             this.car.setTranslateY(this.car.getTranslateY() % App.height);
         }
         System.out.println("Car-luokan getRotate" + this.car.getRotate());
-    }
+    }}
 
     public void accelerate() {
+        if (!(this.running=false)){
         double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
         double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
         changeInX *= 0.05;
         changeInY *= 0.05;
         this.movement = this.movement.add(changeInX, changeInY);
-    }
+    }}
 
     public void decelerate() {
+        if (!(this.running=false)){
         if (!(this.velocity <= 0)) {
 
             double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
@@ -101,7 +116,7 @@ public class Car {
         }*/ 
         //tästä ei näyttänyt olevan oikeastaan mitään hyötyä
         System.out.println("breaking velo: " + this.velocity);
-    }
+    }}
 
     public int getAngle(int x, int y) {
         return (int) this.movement.angle(x, y);
