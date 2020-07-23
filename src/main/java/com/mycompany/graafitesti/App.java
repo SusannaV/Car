@@ -1,17 +1,15 @@
 package com.mycompany.graafitesti;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -76,8 +74,11 @@ public class App extends Application {
 
                 car.move();
                 velocity.setText("Velocity: " + speedometer.getAndSet(car.getVelocity())+ "km/h");
-                direction.setText("Direction: " + car.getAngle(0,-1) + "°");
-                System.out.println("angle: " + car.getAngle(0,-1) );
+                //direction.setText("Direction: " + car.getAngle(0,-1) + "°");
+                DecimalFormat formatter = new DecimalFormat("#0.00");
+                direction.setText("Direction: " + formatter.format(car.getCarRotation()) + "°");
+                //System.out.println("angle: " + car.getAngle(0,-1) );
+                //System.out.println("getRot: " + car.getCarRotation());
             }
         }.start();
 

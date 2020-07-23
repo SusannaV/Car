@@ -35,28 +35,33 @@ public class Car {
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
-    
-    
+
     public void turnLeft() {
-        this.car.setRotate(this.car.getRotate() - 2);
+        if (!(this.velocity<=0)){
+            this.car.setRotate(this.car.getRotate() - (this.velocity*0.1));
+        System.out.println("turnleft: " + this.car.getRotate());
+        }
+        
     }
 
     public void turnRight() {
-        this.car.setRotate(this.car.getRotate() + 2);
+        if (!(this.velocity<=0)){
+            this.car.setRotate(this.car.getRotate() + (this.velocity*0.1));
+        System.out.println("turnRight: " + this.car.getRotate());
+        }
+        //this.car.setRotate(this.car.getRotate() + 2);
     }
 
     public void move() {
-        
-        double newXPoint = this.car.getTranslateX()+this.movement.getX();
+
+        double newXPoint = this.car.getTranslateX() + this.movement.getX();
         this.car.setTranslateX(newXPoint);
-        
+
         double newYPoint = this.car.getTranslateY() + this.movement.getY();
         this.car.setTranslateY(newYPoint);
-        
-        int speed = (int) (movement.magnitude()*10);
-        this.velocity= speed;
-        
 
+        int speed = (int) (movement.magnitude() * 10);
+        this.velocity = speed;
 
         //driving out of the screen
         if (this.car.getTranslateX() < 0) {
@@ -72,6 +77,7 @@ public class Car {
         if (this.car.getTranslateY() > App.height) {
             this.car.setTranslateY(this.car.getTranslateY() % App.height);
         }
+        System.out.println("Car-luokan getRotate" + this.car.getRotate());
     }
 
     public void accelerate() {
@@ -83,15 +89,34 @@ public class Car {
     }
 
     public void decelerate() {
-        double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
-        double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+        if (!(this.velocity <= 0)) {
 
-        changeInX *= -0.05;
-        changeInY *= -0.05;
-        this.movement = this.movement.add(changeInX, changeInY);
+            double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
+            double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+
+            changeInX *= -0.05;
+            changeInY *= -0.05;
+            this.movement = this.movement.add(changeInX, changeInY);
+        } /*else {
+            this.movement.add(0,0);
+        }*/ 
+        //tästä ei näyttänyt olevan oikeastaan mitään hyötyä
+        System.out.println("breaking velo: " + this.velocity);
+    }
+
+    public int getAngle(int x, int y) {
+        return (int) this.movement.angle(x, y);
     }
     
-    public int getAngle(int x, int y){
-        return (int)this.movement.angle(x, y);
+    public double getCarRotation(){
+        double rot = this.car.getRotate();
+        
+        if (rot>359){
+            rot=rot%360;
+        } else if (rot<0){
+            rot=rot+360;
+        }
+        
+        return rot;
     }
 }
