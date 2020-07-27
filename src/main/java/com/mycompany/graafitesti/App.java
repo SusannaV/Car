@@ -93,6 +93,7 @@ public class App extends Application {
                 direction.setText("Direction: " + formatter.format(car.getCarRotation()) + "°");
                 //System.out.println("angle: " + car.getAngle(0,-1) );
                 //System.out.println("getRot: " + car.getCarRotation());
+                //System.out.println("isRunning: " + car.isRunning());
             }
         }.start();
 
