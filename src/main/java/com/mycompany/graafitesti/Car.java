@@ -9,26 +9,26 @@ import javafx.scene.shape.Rectangle;
  */
 public class Car {
 
-    private Rectangle car;
-    private Point2D movement;
+    private final Rectangle car;
     private Point2D direction;
     private Point2D location;
     public double velocity;
     private boolean running;
-    public double acceleration;
-    private int topspeed;
+    public final double acceleration;
+    private final int topspeed;
+    private final int turn;
 
     public Car(int x, int y) {
         this.car = new Rectangle(30, 50);
         this.car.setTranslateX(x);
         this.car.setTranslateY(y);
         this.location = new Point2D(x, y);
-        this.movement = new Point2D(0, 0);
         this.direction = new Point2D(0, -1);
         this.velocity = 0;
         this.running = false;
-        this.acceleration = 0.3;
-        this.topspeed = 50;
+        this.acceleration = 0.3; //used to scale acceleration and deceleration
+        this.topspeed = 50; //used to limit speed
+        this.turn = 2; //used to scale turning
     }
 
     public Rectangle getCar() {
@@ -53,18 +53,22 @@ public class Car {
 
     public void turnLeft() {
         if (this.velocity > 0) {
-            this.car.setRotate(this.car.getRotate() - 2);
+            this.car.setRotate(this.car.getRotate() - turn);
         }
     }
 
     public void turnRight() {
         if (this.velocity > 0) {
-            this.car.setRotate(this.car.getRotate() + 2);
+            this.car.setRotate(this.car.getRotate() + turn);
         }
     }
 
     public void move() {
+            //calculate vector for car direction
+            //90 degrees added to take account difference in coordinate orientations
             this.direction = new Point2D(-Math.cos(Math.toRadians(this.car.getRotate() + 90)), -Math.sin(Math.toRadians(this.car.getRotate() + 90)));
+            
+            //vector normalized so that velocity is correct even in diagonal movement
             this.location = this.location.add(this.direction.normalize().multiply(this.velocity));
             this.car.setTranslateX(this.location.getX());
             this.car.setTranslateY(this.location.getY());
@@ -83,7 +87,7 @@ public class Car {
                 this.car.setTranslateY(this.car.getTranslateY() % App.height);
             }
             
-        //engine breaking
+        //engine braking
             if (this.velocity>0){//
                 decelerate(acceleration*0.1);
             } 

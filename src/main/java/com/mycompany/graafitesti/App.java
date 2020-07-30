@@ -11,8 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.media.AudioClip;
-
 
 
 public class App extends Application {
@@ -23,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        //create screen, labels, buttons and the car
+        //creating screen, labels, buttons and the car
         Pane gamescreen = new Pane();
         
         Button powerOnButton = new Button( "Power on");
@@ -43,13 +41,10 @@ public class App extends Application {
         Car car = new Car(width / 2, height / 2);
         gamescreen.getChildren().addAll(car.getCar(), powerOnButton, powerOffButton, velocity, direction, engine);
        
-        //handling engine power buttons
+        //handling engine power button events
         powerOnButton.setOnAction((event) -> {
             car.setRunning(true);
             engine.setText("Engine running");
-            AudioClip leike = new AudioClip("file:hereinmycar.mp3");
-            
-            
                     });
         powerOffButton.setOnAction((event) -> {
             car.setRunning(false);
@@ -62,7 +57,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //handling keyboard inputs
+        //handling pressed keys
         Map<KeyCode, Boolean> pressedKeys = new HashMap<>();
 
         scene.setOnKeyPressed(event -> {
