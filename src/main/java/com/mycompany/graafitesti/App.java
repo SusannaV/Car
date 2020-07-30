@@ -19,6 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        
         //create screen, labels, buttons and the car
         Pane gamescreen = new Pane();
         
@@ -43,6 +44,7 @@ public class App extends Application {
         powerOnButton.setOnAction((event) -> {
             car.setRunning(true);
             engine.setText("Engine running");
+            
             
                     });
         powerOffButton.setOnAction((event) -> {
@@ -82,14 +84,14 @@ public class App extends Application {
                     car.accelerate();
                 }
                 if (pressedKeys.getOrDefault(KeyCode.DOWN, false)) {
-                    car.decelerate();
+                    car.decelerate(car.acceleration);
                 }
 
                 //moving the car according to inputs above
                 //and updating the texts at the top of the screen
                 car.move();
                 DecimalFormat formatter = new DecimalFormat("#0.00");
-                velocity.setText("Velocity: " + formatter.format(car.getVelocity()*4) + "km/h");
+                velocity.setText("Velocity: " + formatter.format(Math.abs(car.getVelocity()*4)) + "km/h");
                 direction.setText("Direction: " + formatter.format(car.getCarRotation()) + "°");
             }
         }.start();

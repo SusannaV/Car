@@ -15,7 +15,7 @@ public class Car {
     private Point2D location;
     public double velocity;
     private boolean running;
-    private double acceleration;
+    public double acceleration;
     private int topspeed;
 
     public Car(int x, int y) {
@@ -29,7 +29,6 @@ public class Car {
         this.running = false;
         this.acceleration = 0.3;
         this.topspeed = 50;
-
     }
 
     public Rectangle getCar() {
@@ -65,25 +64,12 @@ public class Car {
     }
 
     public void move() {
-        if (!(this.running == false)) {
-
+        //if (!(this.running == false)) {
             this.direction = new Point2D(-Math.cos(Math.toRadians(this.car.getRotate() + 90)), -Math.sin(Math.toRadians(this.car.getRotate() + 90)));
-
             this.location = this.location.add(this.direction.normalize().multiply(this.velocity));
-            System.out.println("loc: " + this.location);
-//            System.out.println("newDirection" + this.direction);
-//            System.out.println("rot: " + this.car.getRotate());
-            //this.car.getRotate();
-            //this.velocity;
-//           double newXPoint = this.car.getTranslateX() + this.movement.getX();
             this.car.setTranslateX(this.location.getX());
-
-//            double newYPoint = this.car.getTranslateY() + this.movement.getY();
             this.car.setTranslateY(this.location.getY());
 
-            //show speed, does not affect movement
-            //int speed = (int) (movement.magnitude() * 10);
-            //this.velocity = speed;
             //driving out of the screen
             if (this.car.getTranslateX() < 0) {
                 this.car.setTranslateX((Math.ceil(Math.abs(this.car.getTranslateX()) / App.width) * App.width) + this.car.getTranslateX());
@@ -97,7 +83,13 @@ public class Car {
             if (this.car.getTranslateY() > App.height) {
                 this.car.setTranslateY(this.car.getTranslateY() % App.height);
             }
-        }
+            
+            
+        //}
+        //engine breaking
+            if (this.velocity>0){//
+                decelerate(acceleration*0.1);
+            } 
     }
 
     public void accelerate() {
@@ -111,15 +103,13 @@ public class Car {
         }
     }
 
-    public void decelerate() {
-        if (!(this.running == false)) {
+    public void decelerate(double deceleration) {
             if (!(this.velocity <= 0)) {
-                this.velocity -= this.acceleration;
+                this.velocity -= deceleration;
             }
             if (this.velocity < 0) {
                 this.velocity = 0;
             }
-        }
     }
 
     public double getCarRotation() {
@@ -130,7 +120,6 @@ public class Car {
         } else if (rot < 0) {
             rot = (Math.ceil(Math.abs(rot) / 360) * 360) + rot;
         }
-
         return rot;
     }
 }
