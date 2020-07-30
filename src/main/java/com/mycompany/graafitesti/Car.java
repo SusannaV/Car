@@ -64,7 +64,6 @@ public class Car {
     }
 
     public void move() {
-        //if (!(this.running == false)) {
             this.direction = new Point2D(-Math.cos(Math.toRadians(this.car.getRotate() + 90)), -Math.sin(Math.toRadians(this.car.getRotate() + 90)));
             this.location = this.location.add(this.direction.normalize().multiply(this.velocity));
             this.car.setTranslateX(this.location.getX());
@@ -84,8 +83,6 @@ public class Car {
                 this.car.setTranslateY(this.car.getTranslateY() % App.height);
             }
             
-            
-        //}
         //engine breaking
             if (this.velocity>0){//
                 decelerate(acceleration*0.1);
