@@ -23,7 +23,7 @@ public class App extends Application {
         //create screen and a car
         GridPane bigscreen = new GridPane();
         bigscreen.setHgap(8);
-        Pane screen = new Pane();
+        Pane gamescreen = new Pane();
         
         Button powerOnButton = new Button( "Power on");
         Button powerOffButton = new Button("Power off");
@@ -38,13 +38,13 @@ public class App extends Application {
         bigscreen.add(velocity, 0,1);
         bigscreen.add(direction, 1,1);
         bigscreen.add(engine, 2, 0);
-        bigscreen.add(screen, 0,2);
+        bigscreen.add(gamescreen, 0,2);
         
         
 
         bigscreen.setPrefSize(width, height);
         Car car = new Car(width / 2, height / 2);
-        screen.getChildren().add(car.getCar());
+        gamescreen.getChildren().add(car.getCar());
         
         powerOnButton.setOnAction(event -> car.setRunning(true));
         powerOffButton.setOnAction(event -> car.setRunning(false));
@@ -94,6 +94,7 @@ public class App extends Application {
                 //System.out.println("angle: " + car.getAngle(0,-1) );
                 //System.out.println("getRot: " + car.getCarRotation());
                 //System.out.println("isRunning: " + car.isRunning());
+                //car.continueWithoutAccelerating();
             }
         }.start();
 

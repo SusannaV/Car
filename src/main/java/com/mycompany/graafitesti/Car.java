@@ -11,14 +11,18 @@ public class Car {
 
     private Rectangle car;
     private Point2D movement;
+    private Point2D vectorVelocity;
+    private Point2D vectorAcceleration;
     private int velocity;
     private boolean running;
 
     public Car(int x, int y) {
-        this.car = new Rectangle(50, 30);
+        this.car = new Rectangle(30, 50);
         this.car.setTranslateX(x);
         this.car.setTranslateY(y);
         this.movement = new Point2D(0, 0);
+        this.vectorVelocity = new Point2D (0,0);
+        this.vectorAcceleration = new Point2D (0,0);
         this.velocity = 0;
         this.running = false;
     }
@@ -46,6 +50,15 @@ public class Car {
     public void turnLeft() {
         if (!(this.velocity <= 0)) {
             this.car.setRotate(this.car.getRotate() - (this.velocity * 0.1));
+         
+
+                /*double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
+                double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+
+                changeInX *= -0.05;
+                changeInY *= -0.05;
+                this.movement = this.movement.add(changeInX, changeInY);*/
+            
             //System.out.println("turnleft: " + this.car.getRotate());
         }
 
@@ -54,9 +67,16 @@ public class Car {
     public void turnRight() {
         if (!(this.velocity <= 0)) {
             this.car.setRotate(this.car.getRotate() + (this.velocity * 0.1));
+            
+                /*double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
+                double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+
+                changeInX *= -0.05;
+                changeInY *= -0.05;
+                this.movement = this.movement.add(changeInX, changeInY);*/
+            
             //System.out.println("turnRight: " + this.car.getRotate());
         }
-        //this.car.setRotate(this.car.getRotate() + 2);
     }
 
     public void move() {
@@ -91,10 +111,10 @@ public class Car {
 
     public void accelerate() {
         if (!(this.running = false)) {
-            double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
-            double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+            double changeInX = Math.sin(Math.toRadians(this.car.getRotate()));
+            double changeInY = Math.cos(Math.toRadians(this.car.getRotate()));
             changeInX *= 0.05;
-            changeInY *= 0.05;
+            changeInY *= -0.05;
             this.movement = this.movement.add(changeInX, changeInY);
         }
     }
@@ -103,11 +123,11 @@ public class Car {
         if (!(this.running = false)) {
             if (!(this.velocity <= 0)) {
 
-                double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
-                double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+                double changeInX = Math.sin(Math.toRadians(this.car.getRotate()));
+                double changeInY = Math.cos(Math.toRadians(this.car.getRotate()));
 
                 changeInX *= -0.05;
-                changeInY *= -0.05;
+                changeInY *= 0.05;
                 this.movement = this.movement.add(changeInX, changeInY);
             }
             /*else {
@@ -133,4 +153,15 @@ public class Car {
 
         return rot;
     }
+    
+    //hyvä idea, huono toteutus :D
+    /*public void continueWithoutAccelerating (){
+        double changeInX = Math.cos(Math.toRadians(this.car.getRotate()));
+                double changeInY = Math.sin(Math.toRadians(this.car.getRotate()));
+
+                changeInX *= -0.02;
+                changeInY *= -0.02;
+                this.movement = this.movement.add(changeInX, changeInY);
+        
+    }*/
 }
