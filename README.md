@@ -1,26 +1,13 @@
-The task
-1. Program a car. The car should have the following functionalities: Engine on, Engine
-off, Accelerate, Decelerate, Turn left, and Turn right.
-2. The program should accept the following inputs: Input for engine on/off, Input for
-throttling, Input for breaking, Input for turning left, and Input for turning right.
-The inputs can be real user inputs or hard coded events (i.e. you may simulate a key
-press in your code, just document it well).
-3. The program should print the following outputs: Current velocity in km/h (default: 0
-km/h), and Direction in degrees (0°-359°, default: 0°).
-The outputs should be updated constantly at a rate of your choosing, e.g. once per
-second.
-4. The functionality of the car should be logical (the car can’t accelerate with the engine
-turned off, the car can’t turn at zero velocity, and so on). Throttling and braking
-should affect the velocity and turning should affect the direction.
+#The Car Program
 
-Methods
-You may use any programming or scripting language (Python, Javascript, C#, Lua...) for
-completing this task. If you are not comfortable with any programming language, you can
-even write pseudo code, as long as you document it well.
 
-Evaluation
-Your design, structure, clarity of implementation and documentation (comments, design
-documents etc.) will be evaluated.
+Flowchart of the design can be found in the folder.
 
-Return your submission as a zip file ​or​ as a link to a cloud service of your choosing (e.g.
-Github, Pastebin…) containing all your files.
+##How to use it?
+- Upon opening the program shows you a car, speedometer, direction, engine status and two buttons for starting and shutting off the engine.
+- The only input the program now acceptes is powering on the engine. After enngine is on, it is now possible to accelerate the car by pressing the up arrow on your keyboad.
+- The car is by default going straight up, to direction 0 degrees. Velocity and direction update immediately.
+- The car will use engine braking to gradually slow down, if you don't accelerate.
+- While the car is in motion, you can now steer the car by pressing left or right arrows or slow the car down by pressing down arrow on your keyboard.
+- The car has a maximum speed limit and is not able to reverse.
+- In case the engine is turned of while the car is still in motion, engine keeps slowly braking and you are able to steer and brake yourself. Acceleration is not allowed when the engine is turned off. 
