@@ -8,7 +8,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,9 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //create screen and a car
-        //GridPane bigscreen = new GridPane();
-        //bigscreen.setHgap(8);
+        //create screen, labels, buttons and the car
         Pane gamescreen = new Pane();
         
         Button powerOnButton = new Button( "Power on");
@@ -37,31 +34,23 @@ public class App extends Application {
         powerOnButton.setLayoutY(10);
         powerOffButton.setLayoutX(700);
         powerOffButton.setLayoutY(10);
-        //gamescreen.add(powerOnButton, 0,0);
-        //gamescreen.add(powerOffButton, 1,0);
-//        gamescreen.add(velocity, 0,1);
-//        gamescreen.add(direction, 1,1);
-//        gamescreen.add(engine, 2, 0);
-
-        
-        
 
         gamescreen.setPrefSize(width, height);
         Car car = new Car(width / 2, height / 2);
         gamescreen.getChildren().addAll(car.getCar(), powerOnButton, powerOffButton, velocity, direction, engine);
-        
+       
+        //handling engine power buttons
         powerOnButton.setOnAction((event) -> {
             car.setRunning(true);
-            System.out.println("Engine running");
             engine.setText("Engine running");
             
                     });
         powerOffButton.setOnAction((event) -> {
             car.setRunning(false);
-            System.out.println("Engine turned off");
             engine.setText("The engine is off. Start the engine.");
                     });
 
+        //creating the scene
         Scene scene = new Scene(gamescreen);
         stage.setTitle("This is a Car program");
         stage.setScene(scene);
@@ -78,36 +67,30 @@ public class App extends Application {
             pressedKeys.put(event.getCode(), Boolean.FALSE);
         });
 
+        
         new AnimationTimer() {
-
             @Override
             public void handle(long currentTime) {
-
+                //listen to keyboard inputs
                 if (pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
                     car.turnLeft();
                 }
                 if (pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
                     car.turnRight();
                 }
-
                 if (pressedKeys.getOrDefault(KeyCode.UP, false)) {
                     car.accelerate();
                 }
-
                 if (pressedKeys.getOrDefault(KeyCode.DOWN, false)) {
                     car.decelerate();
                 }
 
+                //moving the car according to inputs above
+                //and updating the texts at the top of the screen
                 car.move();
-                velocity.setText("Velocity: " + car.getVelocity() + "km/h");
-                //velocity.setText("Velocity: " + speedometer.getAndSet(car.getVelocity())+ "km/h");
-                //direction.setText("Direction: " + car.getAngle(0,-1) + "°");
                 DecimalFormat formatter = new DecimalFormat("#0.00");
+                velocity.setText("Velocity: " + formatter.format(car.getVelocity()*4) + "km/h");
                 direction.setText("Direction: " + formatter.format(car.getCarRotation()) + "°");
-                //System.out.println("angle: " + car.getAngle(0,-1) );
-                //System.out.println("getRot: " + car.getCarRotation());
-                //System.out.println("isRunning: " + car.isRunning());
-                //car.continueWithoutAccelerating();
             }
         }.start();
 
