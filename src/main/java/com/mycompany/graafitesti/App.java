@@ -21,35 +21,48 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //create screen and a car
-        GridPane bigscreen = new GridPane();
-        bigscreen.setHgap(8);
+        //GridPane bigscreen = new GridPane();
+        //bigscreen.setHgap(8);
         Pane gamescreen = new Pane();
         
         Button powerOnButton = new Button( "Power on");
         Button powerOffButton = new Button("Power off");
         Text velocity = new Text(10, 20, "Velocity: ");
         Text direction = new Text(10, 40, "Direction: ");
-        Text engine = new Text (10, 20, "The engine is off. Start the engine.");
+        Text engine = new Text (200, 20, "The engine is off. Start the engine.");
         
         powerOnButton.setFocusTraversable(false);
         powerOffButton.setFocusTraversable(false);
-        bigscreen.add(powerOnButton, 0,0);
-        bigscreen.add(powerOffButton, 1,0);
-        bigscreen.add(velocity, 0,1);
-        bigscreen.add(direction, 1,1);
-        bigscreen.add(engine, 2, 0);
-        bigscreen.add(gamescreen, 0,2);
+        powerOnButton.setLayoutX(600);
+        powerOnButton.setLayoutY(10);
+        powerOffButton.setLayoutX(700);
+        powerOffButton.setLayoutY(10);
+        //gamescreen.add(powerOnButton, 0,0);
+        //gamescreen.add(powerOffButton, 1,0);
+//        gamescreen.add(velocity, 0,1);
+//        gamescreen.add(direction, 1,1);
+//        gamescreen.add(engine, 2, 0);
+
         
         
 
-        bigscreen.setPrefSize(width, height);
+        gamescreen.setPrefSize(width, height);
         Car car = new Car(width / 2, height / 2);
-        gamescreen.getChildren().add(car.getCar());
+        gamescreen.getChildren().addAll(car.getCar(), powerOnButton, powerOffButton, velocity, direction, engine);
         
-        powerOnButton.setOnAction(event -> car.setRunning(true));
-        powerOffButton.setOnAction(event -> car.setRunning(false));
+        powerOnButton.setOnAction((event) -> {
+            car.setRunning(true);
+            System.out.println("Engine running");
+            engine.setText("Engine running");
+            
+                    });
+        powerOffButton.setOnAction((event) -> {
+            car.setRunning(false);
+            System.out.println("Engine turned off");
+            engine.setText("The engine is off. Start the engine.");
+                    });
 
-        Scene scene = new Scene(bigscreen);
+        Scene scene = new Scene(gamescreen);
         stage.setTitle("This is a Car program");
         stage.setScene(scene);
         stage.show();

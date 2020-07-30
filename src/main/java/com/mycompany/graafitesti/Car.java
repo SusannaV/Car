@@ -80,7 +80,7 @@ public class Car {
     }
 
     public void move() {
-        if (!(this.running = false)) {
+        if (!(this.running == false)) {
 
             double newXPoint = this.car.getTranslateX() + this.movement.getX();
             this.car.setTranslateX(newXPoint);
@@ -110,7 +110,7 @@ public class Car {
     }
 
     public void accelerate() {
-        if (!(this.running = false)) {
+        if (!(this.running == false)) {
             double changeInX = Math.sin(Math.toRadians(this.car.getRotate()));
             double changeInY = Math.cos(Math.toRadians(this.car.getRotate()));
             changeInX *= 0.05;
@@ -120,7 +120,7 @@ public class Car {
     }
 
     public void decelerate() {
-        if (!(this.running = false)) {
+        if (!(this.running == false)) {
             if (!(this.velocity <= 0)) {
 
                 double changeInX = Math.sin(Math.toRadians(this.car.getRotate()));
