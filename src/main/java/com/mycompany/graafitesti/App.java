@@ -94,7 +94,6 @@ public class App extends Application {
                 direction.setText("Direction: " + formatter.format(car.getCarRotation()) + "°");
             }
         }.start();
-
     }
 
     public static void main(String[] args) {
