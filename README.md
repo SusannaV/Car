@@ -1,6 +1,6 @@
 # The Car Program
 
-This program creates a car and let's you drive around the screen with it. Flowchart of the design can be found in the folder.
+This program creates a car and let's you drive around the screen with it. Flowchart of the design can be found in the folder (Design flowchart.pdf).
 
 ### How does it work?
 - Upon opening the program shows you a car, speedometer, direction, engine status and two buttons for starting and shutting off the engine.
